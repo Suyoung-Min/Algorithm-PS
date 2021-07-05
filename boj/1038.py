@@ -4,9 +4,7 @@ if n <= 10:
     print(n)
     quit()
 
-q = []
-for i in range(1,10):
-    q.append(i)
+q = [ i for i in range(10)]
 
 cur = 9
 while True:
