@@ -13,10 +13,11 @@ while True:
     tmp = q.pop(0)
     for i in range(tmp%10):
         cur+=1
-        q.append(tmp*10 + i)
+        ans = tmp*10 + i
+        q.append(ans)
         if cur == n:
-            print(tmp*10 + i)
+            print(ans)
             quit()
-        if tmp*10 + i == 9876543210:
+        if ans == 9876543210:
             print(-1)
             quit()
