@@ -1,10 +1,8 @@
 def dfs(p):
-    if dfsVisit[p]==1:
-        return
-    dfsVisit[p]=1
     print(p,end=' ')
+    dfsVisit[p]=1
     for i in range(1,n+1):
-        if graph[p][i] == 1:
+        if graph[p][i] == 1 and dfsVisit[i] == 0:
             dfs(i)
 
 n,m,v=list(map(int,input().split(' ')))
