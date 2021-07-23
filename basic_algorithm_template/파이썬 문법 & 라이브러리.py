@@ -1,7 +1,8 @@
 import sys
 import heapq
 
-str1 = sys.stdin.readline().rstrip() #input 빠르게 받기
+str1 = sys.stdin.readline().rstrip() #input 빠르게 str 받기 & 개행문자 제거 
+list1 = map(int,sys.stdin.readline().split()) # 여러개 정수를 리스트로 받기
 
 heap=[]
 heapq.heappush(heap,10)
