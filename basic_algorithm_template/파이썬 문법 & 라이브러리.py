@@ -23,3 +23,8 @@ print( math.floor(12.2) ) # 12 내림
 print( math.trunc(12.2) ) # 12 버림
 
 print( round(0.4666 , 2) ) # 0.47 반올림 & 자릿수
+
+"""
+2021.8.4
+Counting sort와 일반 sort들의 차이 
+"""
