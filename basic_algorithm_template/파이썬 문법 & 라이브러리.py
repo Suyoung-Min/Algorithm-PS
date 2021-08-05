@@ -2,6 +2,7 @@ import sys
 import heapq
 import math
 from collections import deque
+from collections import Counter # 리스트 내의 중복 부분 조회
 
 str1 = sys.stdin.readline().rstrip() #input 빠르게 str 받기 & 개행문자 제거 
 list1 = map(int,sys.stdin.readline().split()) # 여러개 정수를 리스트로 받기
