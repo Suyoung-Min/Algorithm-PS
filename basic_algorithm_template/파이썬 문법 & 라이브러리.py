@@ -25,6 +25,12 @@ print( math.trunc(12.2) ) # 12 버림
 
 print( round(0.4666 , 2) ) # 0.47 반올림 & 자릿수
 
+'a'.isupper() # 대문자인가
+'A'.islower() # 소문자인가
+'a'.upper() # 대문자로
+'A'.lower() # 
+
+
 """
 2021.8.3
 진법 변환 36 to 10, 10 to 36, else
