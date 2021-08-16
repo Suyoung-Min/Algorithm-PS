@@ -23,3 +23,21 @@ int main(){
         printf("%d\n",dp[n][0]+dp[n][1]);
     }
 }
+
+/* 라이브러리 가져오는 것도 메모리를 잡아먹는다?
+#include<iostream>
+#include<cstdio>
+using namespace std;
+
+int main(){
+    int tc,n,a;
+    scanf("%d",&tc);
+    while(tc--){
+        a=0;
+        scanf("%d",&n);
+        for(int t=n;t>=0;t-=3){
+            a += 1+t/2;
+        }printf("%d\n",a);
+    }
+}
+*/
