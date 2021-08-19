@@ -41,7 +41,6 @@ int main(){
                     pos = dq.front();
                     dq.pop_front();
                     y=pos.first;x=pos.second;
-                    visit[y][x] = true;
                     if(y-1 >= 0 && visit[y-1][x] == false && map[y-1][x] > t){
                         dq.push_back(make_pair(y-1,x));
                         visit[y-1][x]=true;
