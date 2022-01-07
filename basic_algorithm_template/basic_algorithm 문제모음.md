@@ -33,3 +33,8 @@
 5397 키로거: deque 2개를 이어서 리스트 하나를 사용할 때보다 시간복잡도 개선
 리스트 중간을 건드리면서 시간복잡도 개선이 필요할 
 deque | idx | deque
+
+입출력 개선
+import sys
+input = sys.stdin.readline
+sys.stdout.write() #'\n' 
