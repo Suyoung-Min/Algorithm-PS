@@ -34,9 +34,13 @@
 
 리스트 중간을 건드리면서 시간복잡도 개선이 필요할 때
 
+
 deque | idx | deque
 
 입출력 개선
+
 import sys
+
 input = sys.stdin.readline
+
 sys.stdout.write() #'\n' 
