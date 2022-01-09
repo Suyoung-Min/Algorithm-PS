@@ -44,3 +44,6 @@ import sys
 input = sys.stdin.readline
 
 sys.stdout.write() #'\n' 
+\n\n
+
+bfs 탐색 -> 빈칸을 탐색하여 넓이 파악하기 -> 벽부수기 4
