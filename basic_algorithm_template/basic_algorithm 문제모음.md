@@ -49,3 +49,5 @@ sys.stdout.write() #'\n'
 \n\n
 
 bfs 탐색 -> 빈칸을 탐색하여 넓이 파악하기 -> 벽부수기 4
+
+리스트 2개 원소끼리 더하기 dp = [a+b-1 for a,b in zip(dp1,dp2)]
