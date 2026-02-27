@@ -22,7 +22,7 @@ def gravity_grid():
     
     for x in range(n):
         ng = [0]*n
-        next_row = 3
+        next_row = n-1
         
         for y in range(n-1, -1, -1):
             if grid[y][x]:
