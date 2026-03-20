@@ -27,7 +27,7 @@ def bomb(): # 같은 숫자 M 개 이상이면 터뜨리기만
                 si = y
 
         if si - last_y + 1 >= m: # 마지막 남은 si 가 m 이상일 때
-            for i in range(si+1):
+            for i in range(last_y, si + 1):
                 grid[i][x] = 0
                 
 
