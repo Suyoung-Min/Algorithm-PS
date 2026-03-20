@@ -5,31 +5,39 @@ grid = [list(map(int, input().split())) for _ in range(n)]
 
 def bomb(): # 같은 숫자 M 개 이상이면 터뜨리기만
     
-    for x in range(n):
+    bomb_flag = False
+    while True:
         
-        last_y = 0
-        si = -1 # start_index
-        for y in range(n-1, -1, -1):
-            #breakpoint()
+        
+        for x in range(n):
             
-            if grid[y][x] == 0: 
-                last_y = y+1
-                break
-            
-            if si == -1:
-                si = y
-            elif grid[y][x] != grid[si][x]:
+            last_y = 0
+            si = -1 # start_index
+            for y in range(n-1, -1, -1):
+                #breakpoint()
                 
-                if si - y >= m:
-                    for i in range(y+1, si+1):
-                        grid[i][x] = 0
-                        
-                si = y
+                if grid[y][x] == 0: 
+                    last_y = y+1
+                    break
+                
+                if si == -1:
+                    si = y
+                elif grid[y][x] != grid[si][x]:
+                    
+                    if si - y >= m:
+                        bomb_flag = True
+                        for i in range(y+1, si+1):
+                            grid[i][x] = 0
+                            
+                    si = y
 
-        if si - last_y + 1 >= m: # 마지막 남은 si 가 m 이상일 때
-            for i in range(last_y, si + 1):
-                grid[i][x] = 0
+            if si - last_y + 1 >= m: # 마지막 남은 si 가 m 이상일 때
+                bomb_flag = True
+                for i in range(last_y, si + 1):
+                    grid[i][x] = 0
                 
+            if bomb_flag == False:
+                break
 
 def gravity_fall():
     ng = [0]*n
