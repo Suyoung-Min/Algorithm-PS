@@ -14,17 +14,16 @@ s = 0
 for command in commands:
     action = command[0]
     target = command[1]
+    t = (1<<target)
     
     if action == "clear":
         s = 0
     elif action == "delete":
-        s = s & ~(1<<target)
+        s = s & ~t
     elif action == "print":
-        if s & (1<<target):
-            print('1')
-        else:
-            print('0')
+        if s&t: print('1')
+        else: print('0')
     elif action == "toggle":
-        s = s ^ (1<<target)
+        s = s ^ t
     elif action == "add":
-        s = s | (1<<target)
+        s = s | t
