@@ -13,12 +13,15 @@ s = 0
 
 for command in commands:
     action = command[0]
-    target = command[1]
-    t = (1<<target)
     
     if action == "clear":
         s = 0
-    elif action == "delete":
+        continue
+    
+    target = command[1]
+    t = (1<<target)
+    
+    if action == "delete":
         s = s & ~t
     elif action == "print":
         if s&t: print('1')
