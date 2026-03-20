@@ -3,13 +3,21 @@ arr = list(map(int, input().split()))
 
 # Please write your code here.
 
-def generate_combinations(tarr, r):
-    result = []
+max_sum = 0
+
+def generate_combinations_and_sum(tarr, r):
+    
     
     def backtracking(current, start):
+        global max_sum
         
         if len(current) == r:
-            result.append(current[:])
+            
+            a, b, c = current
+            
+            if not ((a&b) or (b&c) or (c&a)): # 겹치는 게 없다면
+                max_sum = max(max_sum, a+b+c)
+            
             return
         
         for i in range(start, len(tarr)):
@@ -21,18 +29,7 @@ def generate_combinations(tarr, r):
             
     backtracking([], 0)
     
-    return result
+    return max_sum
 
-carr = generate_combinations(arr, 3)
 
-max_sum = 0
-
-for targets in carr:
-    a, b, c = targets
-    
-    if a&b or b&c or c&a: # 겹치는 게 있으면
-        continue
-    
-    max_sum = max(max_sum, a+b+c)
-    
-print(max_sum)
+print(generate_combinations_and_sum(arr, 3))
