@@ -4,14 +4,12 @@ grid = [
     list(input().rstrip()) for _ in range(n)
 ]
 
-
 # Please write your code here.
 
 """
 1. 동전 위치 파악
-2. 동전마다 각 동전 및 S, E 까지 거리 파악 -> 중복방문 허용 및 동전위치 가능
 3. 동전들 중 3개 조합 -> 순서는 오름차순 고정
-4. 3개 조합 a, b, c S -> a -> b -> c -> E 거리로 최단거리 갱신
+4. 3개 조합 a, b, c S -> a -> b -> c -> E 거리로 최단거리 갱신 - 백트래킹
 """
 def manhattan_dist(pos1, pos2):
     return abs(pos1[0] - pos2[0]) + abs(pos1[1] - pos2[1])
@@ -26,13 +24,6 @@ def solve():
     for y in range(n):
         for x in range(n):
             if grid[y][x] == 'S': # 시작점이면
-                S_xy = (y,x)
-            elif grid[y][x] == 'E': # 끝점이면
-                E_xy = (y,x)
-
-    for y in range(n):
-        for x in range(n):
-            if grid[y][x] == 'S': # 시작점이면
                 coins_pos['start'] = (y,x)
             elif grid[y][x] == 'E': # 끝점이면
                 coins_pos['end'] = (y,x)
@@ -42,14 +33,9 @@ def solve():
                 coins_list.append(coin_num) # 코인 저장
                 coins_pos[coin_num] = (y,x)
                 
-                
-    
     coins_list.sort()
-    
-    # 코인별 조합 뽑기 및 거리 저장
-    
+
     coin_nums = 0
-        
     
     def backtracking(pos, idx, dist): # 최대 3개
         nonlocal ans, coin_nums
@@ -69,7 +55,6 @@ def solve():
         
         if idx == len(coins_list): # 3개 이상으로 코인 못 뽑을 때
             return
-        
         
         coin_nums += 1
         # 위치를 동전 위치로 옮기고, 거리 누적, 다음 동전 인덱스로 진행
