@@ -13,6 +13,10 @@ def backtrack(current, count, cost): # 현재 위치, 이동 지점 개수, 방�
     
     # 종료 조건
     # 1. count 가 n 이고, current 에서 0(1) 로 가는 경우가 있을 때
+    # 2. cost 가 ans 이상일 때
+    
+    if cost >= ans:
+        return
     
     if count == n-1: # 마지막에 0으로 돌아가야 하니까 n 이 아니라 n-1
         if grid[current][0]: # visited[0] 은 방문처리 되어 있으니 제외
