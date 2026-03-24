@@ -24,8 +24,8 @@ def backtracking(start): # idx 0 ~ n-1
         
         overlapped = False
         
-        for idx in lines:
-            ax1, ax2 = lines[idx]
+        for line in lines:
+            ax1, ax2 = line
             bx1, bx2 = segments[i]
             
             if max(ax1, bx1) <= min(ax2, bx2): # 겹치면
@@ -34,9 +34,9 @@ def backtracking(start): # idx 0 ~ n-1
         
                     
         if not overlapped: # 겹치지 않으면 백트래킹 더 진행
+            lines.append(segments[i])
             backtracking(i+1)
-            
-        lines.pop()
+            lines.pop()
         
 backtracking(0)    
             
