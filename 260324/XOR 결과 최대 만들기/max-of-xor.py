@@ -16,10 +16,13 @@ def generate_xor_comb(arr, m):
             return
         
         for i in range(start, len(arr)):
-
-            backtracking(current_xor ^ arr[i], current_l+1, i+1)
             
-    backtracking(arr[0], 1, 1)
+            if current_l == 0: # 첫 백트래킹이면 -> 인자 초기화부터
+                backtracking(arr[i], 1, i+1)
+            else:
+                backtracking(current_xor ^ arr[i], current_l+1, i+1)
+            
+    backtracking(0, 0, 0)
     
 generate_xor_comb(Arr, M)
 print(ans)            
