@@ -86,6 +86,8 @@ def solve():
             
     backtracking(coins_pos['start'], 0, 0)
     
+    if ans == 1e9: ans = -1
+    
     return ans
             
 print(solve())
