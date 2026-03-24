@@ -13,6 +13,9 @@ def backtracking(idx, max_dist):
     
     # 종료 조건 1. m 개 뽑았을 때, 2. idx 끝일 때
     
+    if max_dist > ans:
+        return
+    
     if len(current) == m:
         ans = min(ans, max_dist)
         return
