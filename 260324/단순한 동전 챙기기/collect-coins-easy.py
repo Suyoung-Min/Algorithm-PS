@@ -40,6 +40,9 @@ def solve():
         
         # 가지치기 pruning 넣기
         
+        if dist >= ans:
+            return
+        
         if count == 3: # 종료조건 1. 3개 뽑았을 때
             
             dist += manhattan_dist(pos, coins_pos['end'])
@@ -48,20 +51,16 @@ def solve():
             
             return
         
-        if dist >= ans:
-            return
         
         if idx == len(coins_list): # 3개 이상으로 코인 못 뽑을 때
             return
         
-        count += 1
         # 위치를 동전 위치로 옮기고, 거리 누적, 다음 동전 인덱스로 진행
         backtracking(coins_pos[coins_list[idx]], 
                      idx+1, 
                      dist + manhattan_dist(pos, coins_pos[coins_list[idx]]),
-                     count)
+                     count+1 )
         
-        count -= 1
         
         # 결정 2. 현재 동전(exist[idx])을 그냥 무시하고 지나칠 때
         # 내 위치와 거리는 그대로 둔 채, 다음 동전 인덱스만 확인하러 감
