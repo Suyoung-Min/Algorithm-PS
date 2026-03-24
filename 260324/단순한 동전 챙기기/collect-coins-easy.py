@@ -11,15 +11,15 @@ grid = [
 3. 동전들 중 3개 조합 -> 순서는 오름차순 고정
 4. 3개 조합 a, b, c S -> a -> b -> c -> E 거리로 최단거리 갱신 - 백트래킹
 """
+
 def manhattan_dist(pos1, pos2):
     return abs(pos1[0] - pos2[0]) + abs(pos1[1] - pos2[1])
-
 
 def solve():
     
     coins_pos = {} # 코인들 좌표
     coins_list = []
-    ans = 1e9
+    ans = float('inf')
 
     for y in range(n):
         for x in range(n):
@@ -69,7 +69,7 @@ def solve():
             
     backtracking(coins_pos['start'], 0, 0, 0)
     
-    if ans == 1e9: ans = -1
+    if ans == float('inf'): ans = -1
     
     return ans
             
