@@ -20,8 +20,8 @@ def backtrack(current, count, cost): # 현재 위치, 이동 지점 개수, 방�
         
         return
     
-    for next in range(len(grid[current])):
-        if not visited[next]:
+    for next in range(n):
+        if not visited[next] and grid[current][next]:
             
             visited[next] = True
             
