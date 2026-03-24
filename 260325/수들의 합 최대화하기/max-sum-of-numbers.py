@@ -7,11 +7,11 @@ x_visited = [False] * n
 
 ans = 0
 
-def backtrack(sy, area_sum, count): # start y, 정수합, 정수 개수 
+def backtrack(sy, area_sum): # start y, 정수합, 정수 개수 
     global ans
     
     # 종료 조건 n 개 뽑았을 때
-    if count == n:
+    if sy == n:
         ans = max(ans, area_sum)
         return
     
@@ -20,10 +20,10 @@ def backtrack(sy, area_sum, count): # start y, 정수합, 정수 개수
         
             x_visited[x] = True
             
-            backtrack(sy+1, area_sum + grid[sy][x], count+1)
+            backtrack(sy+1, area_sum + grid[sy][x])
             
             x_visited[x] = False
             
-backtrack(0, 0, 0)
+backtrack(0, 0)
 
 print(ans)
