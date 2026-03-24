@@ -67,7 +67,7 @@ def solve():
         backtracking(pos, idx + 1, dist)
         
             
-    backtracking(coins_pos['start'], 0, 0)
+    backtracking(coins_pos['start'], 0, 0, 0)
     
     if ans == 1e9: ans = -1
     
