@@ -2,7 +2,7 @@ n, m = map(int, input().split())
 points = [list(map(int, input().split())) for _ in range(n)]
 
 def dist(pos1, pos2):
-    return ((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2) ** (1/2)
+    return (pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2
 
 ans = float('inf')
 
@@ -44,4 +44,4 @@ def backtracking(idx, max_dist):
     
 backtracking(0, 0)
 
-print(int(ans**2))
+print(ans)
