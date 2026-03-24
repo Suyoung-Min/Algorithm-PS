@@ -11,27 +11,27 @@ def backtracking(start): # idx 0 ~ n-1
     
     # 백트래킹 종료 조건 -> segments 마지막까지 탐색했을 때
     
-    if start == n:
-        ans = max(ans, len(lines))
-        return
+    ans = max(ans, len(lines))
+    
+    if start == n: return
     
     for i in range(start, len(segments)):
         
-        lines.append(segments[i])
+        # lines.append(segments[i])
         # 후보 리스트에 넣고 리스트 내 선분들이 겹치는지 아닌지 탐색
         # 겹치면 넘기기
         # 겹치지 않으면 백트래킹 더 진행
         
         overlapped = False
         
-        for j in range(len(lines)):
-            for k in range(j+1, len(lines)):
-                ax1, ax2 = lines[j]
-                bx1, bx2 = lines[k]
-                
-                if max(ax1, bx1) <= min(ax2, bx2): # 겹치면
-                    overlapped = True
-                    break
+        for idx in lines:
+            ax1, ax2 = lines[idx]
+            bx1, bx2 = segments[i]
+            
+            if max(ax1, bx1) <= min(ax2, bx2): # 겹치면
+                overlapped = True
+                break
+        
                     
         if not overlapped: # 겹치지 않으면 백트래킹 더 진행
             backtracking(i+1)
