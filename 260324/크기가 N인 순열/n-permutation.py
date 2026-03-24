@@ -1,7 +1,4 @@
 n = int(input())
-
-
-arr = []
 visited = [False] * (n+1)
 
 def backtracking(current):
