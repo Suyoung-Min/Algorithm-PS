@@ -1,16 +1,16 @@
 n, m = map(int, input().split())
 
-grid2 = [list(map(int, input().split())) for _ in range(n)]
+grid = [list(map(int, input().split())) for _ in range(n)]
 
-visited = [[0] * m for _ in range(n)]
+is_water = [[0] * m for _ in range(n)]
 
 dirs = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 
 from collections import deque
 
-q2 = deque([(0, 0)]) # 녹이는 과정의 큐
+nq = deque([(0, 0)]) # 녹이는 과정의 큐
 water_q = deque([(0,0)]) # 겉의 물의 큐
-visited[0][0] = 1
+is_water[0][0] = 1
 
 # 겉에 물만 q2 에 넣기
 while water_q:
@@ -22,40 +22,31 @@ while water_q:
         
         if ty < 0 or ty >= n or tx < 0 or tx >= m: continue
         
-        if not visited[ty][tx] and not grid2[ty][tx]: # 방문 안했고, 물이면
-            visited[ty][tx] = 1
+        if not is_water[ty][tx] and not grid[ty][tx]: # 방문 안했고, 물이면
+            is_water[ty][tx] = 1
             water_q.append((ty,tx))
-            q2.append((ty, tx))
+            nq.append((ty, tx))
             
 t = 0
 last_garea = 0
 while True:
     
-    # print(f't == {t}')
-    # for line in grid2:
-    #     print(*line)
-    # print("#"*20)
+    cq = nq # cq: 현재 시간에 쓸 큐 , nq: 다음 시간에 쓸 큐
+    nq = deque([])
     
-    q1 = q2
-    q2 = deque([])
-    grid1 = [row[:] for row in grid2]
-    
-    garea = sum(sum(row) for row in grid1)
+    garea = sum(sum(row) for row in grid)
     
     if garea == 0: # 빙하가 다 녹으면
         break
     t += 1
     # 물 탐색 
-    # 1. 빙하를 못녹이는 물이면 q2 에 넣기
-    # 2. 빙하가 녹아서 물이 되면 q2 에 넣기
-    # 3. grid1 기반으로 판단 후 grid2 에 갱신
-    # 4. 한번 녹인 빙하는 visited 로 관리 -> grid1, grid2 를 쓰기 때문에 필요
+    # 1. 빙하가 녹아서 물이 되면 nq 에 넣기 + 같혀 있던 물이 해방되면 cq에 넣기
+    # 2. 한번 녹인 빙하는 is_water 로 관리
     tmp_garea = 0
-    while q1: # q1 에 있는 건 무조건 빙하를 녹일 수 있는 물
-        y, x = q1.popleft()
+    while cq: # cq 에 있는 건 무조건 빙하를 녹일 수 있는 물
+        y, x = cq.popleft()
         
-        
-        # 2. 근처 빙하 녹이기
+        # 1. 근처 빙하 녹이기
         
         for dy, dx in dirs:
             ty = y + dy
@@ -63,17 +54,16 @@ while True:
             
             if ty < 0 or ty >= n or tx < 0 or tx >= m: continue
             
-            if visited[ty][tx]: continue
+            if is_water[ty][tx]: continue # 이미 빙하를 녹인 물이면 -> nq 에 넣을 필요 없음
             
-            if grid1[ty][tx]: # 빙하면
-                visited[ty][tx] = 1
-                grid2[ty][tx] = 0 # 녹이기
-                q2.append((ty,tx)) # 녹여서 물됐으니 q2 에 넣기
+            if grid[ty][tx]: # 빙하면
+                is_water[ty][tx] = 1
+                grid[ty][tx] = 0 # 녹이기
+                nq.append((ty,tx)) # 녹여서 물됐으니 nq 에 넣기
                 tmp_garea += 1 # 현재 턴에서 녹인 빙하 크기 추가
-            else: # 물인데 아직 방문표시 안된 물-> 갇혀있던 물이면
-                visited[ty][tx] = 1
-                q1.append((ty,tx)) 
-            
+            else: # 물인데 아직 방문표시 안된 물-> 갇혀있던 물이면 바로 cq 에 넣어서 빙하 녹이게
+                is_water[ty][tx] = 1
+                cq.append((ty,tx)) 
                 
     last_garea = tmp_garea
             
