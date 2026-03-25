@@ -63,11 +63,17 @@ while True:
             
             if ty < 0 or ty >= n or tx < 0 or tx >= m: continue
             
-            if not visited[ty][tx] and grid1[ty][tx]: # 근처 빙하가 있고 아직 안녹였으면
+            if visited[ty][tx]: continue
+            
+            if grid1[ty][tx]: # 빙하면
                 visited[ty][tx] = 1
                 grid2[ty][tx] = 0 # 녹이기
                 q2.append((ty,tx)) # 녹여서 물됐으니 q2 에 넣기
                 tmp_garea += 1 # 현재 턴에서 녹인 빙하 크기 추가
+            else: # 물인데 아직 방문표시 안된 물-> 갇혀있던 물이면
+                visited[ty][tx] = 1
+                q2.append((ty,tx))
+            
                 
     last_garea = tmp_garea
             
