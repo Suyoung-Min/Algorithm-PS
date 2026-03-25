@@ -72,7 +72,7 @@ while True:
                 tmp_garea += 1 # 현재 턴에서 녹인 빙하 크기 추가
             else: # 물인데 아직 방문표시 안된 물-> 갇혀있던 물이면
                 visited[ty][tx] = 1
-                q2.append((ty,tx))
+                q1.append((ty,tx)) 
             
                 
     last_garea = tmp_garea
