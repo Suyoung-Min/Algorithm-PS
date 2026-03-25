@@ -28,15 +28,16 @@ while water_q:
             nq.append((ty, tx))
             
 t = 0
+
+total_ice = sum(sum(row) for row in grid)
 last_garea = 0
+
 while True:
     
     cq = nq # cq: 현재 시간에 쓸 큐 , nq: 다음 시간에 쓸 큐
     nq = deque([])
     
-    garea = sum(sum(row) for row in grid)
-    
-    if garea == 0: # 빙하가 다 녹으면
+    if total_ice == 0:
         break
     t += 1
     # 물 탐색 
@@ -66,5 +67,6 @@ while True:
                 cq.append((ty,tx)) 
                 
     last_garea = tmp_garea
+    total_ice -= tmp_garea
             
 print(t, last_garea)
