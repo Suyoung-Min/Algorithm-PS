@@ -8,12 +8,24 @@ dirs = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 
 from collections import deque
 
-q2 = deque([])
+q2 = deque([(0, 0)]) # 녹이는 과정의 큐
+water_q = deque([(0,0)]) # 겉의 물의 큐
+visited[0][0] = 1
 
-for y in range(n):
-    for x in range(m):
-        if not grid2[y][x]:
-            q2.append((y,x)) # 얼음 넣기
+# 겉에 물만 q2 에 넣기
+while water_q:
+    y, x = water_q.popleft()
+    
+    for dy, dx in dirs:
+        ty = y + dy
+        tx = x + dx
+        
+        if ty < 0 or ty >= n or tx < 0 or tx >= m: continue
+        
+        if not visited[ty][tx] and not grid2[ty][tx]: # 방문 안했고, 물이면
+            visited[ty][tx] = 1
+            water_q.append((ty,tx))
+            q2.append((ty, tx))
             
 t = 0
 last_garea = 0
@@ -39,25 +51,9 @@ while True:
     # 3. grid1 기반으로 판단 후 grid2 에 갱신
     # 4. 한번 녹인 빙하는 visited 로 관리 -> grid1, grid2 를 쓰기 때문에 필요
     tmp_garea = 0
-    while q1:
+    while q1: # q1 에 있는 건 무조건 빙하를 녹일 수 있는 물
         y, x = q1.popleft()
         
-        around_flag = True # 빙하에 둘러쌓여 있나
-        
-        # 1
-        for dy, dx in dirs:
-            ty = y + dy
-            tx = x + dx
-            
-            if ty < 0 or ty >= n or tx < 0 or tx >= m: continue
-            
-            if grid1[ty][tx] == 0: # 다른 물과 하나라도 연결되어 있으면
-                around_flag = False
-                break
-            
-        if around_flag: # 빙하에 둘러쌓여 있으면 -> 물못녹임
-            q2.append((y,x))
-            continue
         
         # 2. 근처 빙하 녹이기
         
