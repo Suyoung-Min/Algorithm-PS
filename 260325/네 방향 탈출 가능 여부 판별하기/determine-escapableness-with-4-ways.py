@@ -25,10 +25,15 @@ while q:
         ty = y + dy
         tx = x + dx
         
-        if ty < 0 or ty >= n or tx < 0 or tx >= n: continue
+        if ty < 0 or ty >= n or tx < 0 or tx >= m: continue
         
         if not visited[ty][tx] and a[ty][tx] == 1:
-            visited[ty][tx] = True
+            visited[ty][tx] = 1
             q.append((ty, tx))
             
 print(int(ans))
+
+# 3 5
+# 1 1 0 1 0
+# 1 1 1 1 1
+# 0 0 1 0 1
