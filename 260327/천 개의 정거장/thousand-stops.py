@@ -3,25 +3,23 @@ def main():
     
     a, b, n = map(int, input().split()) # 시작점 a 도착점 b 버스 개수 n
     
-    bus_route = [[] for _ in range(n+1)] # 버스 노선 저장 1 ~ n 번 버스
-    bus_cost = [0] * (n+1)
     
     edges = [[] for _ in range(1001)]
     visited = [[float('inf'), float('inf')] for _ in range(1001)] # [거리, 시간]
     # 경로 1 ~ 1000 s. (e, cost, time)
     # 시작점. (도착점, 비용, 시간)
     
-    for i in range(1, n + 1):
+    for _ in range(1, n + 1):
         
-        bus_cost[i], _ = map(int, input().split())
-        bus_route[i] = list(map(int, input().split()))
+        bus_cost, _ = map(int, input().split())
+        bus_route = list(map(int, input().split()))
         
-        for j in range(len(bus_route[i])-1):
+        for i in range(len(bus_route)-1):
             tmp_time = 0
             
-            for k in range(j+1, len(bus_route[i])):
+            for j in range(i+1, len(bus_route)):
                 tmp_time += 1
-                edges[bus_route[i][j]].append((bus_route[i][k], bus_cost[i], tmp_time))
+                edges[bus_route[i]].append((bus_route[j], bus_cost, tmp_time))
 
                 
     import heapq
