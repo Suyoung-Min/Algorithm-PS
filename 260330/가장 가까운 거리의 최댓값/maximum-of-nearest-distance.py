@@ -54,7 +54,7 @@ def main():
                 
                 if new_dist < visited[next_v][si]:
                     visited[next_v][si] = new_dist
-                    heapq.heappush(q, (next_dist, next_v))
+                    heapq.heappush(q, (new_dist, next_v))
                     
     for key in visited.keys():
         visited[key] = min(visited[key])
