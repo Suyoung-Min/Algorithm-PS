@@ -7,12 +7,7 @@ count = defaultdict(int)
 ans = 0
 
 for elem in arr:
-
-    target = k - elem
-
-    if target in count:
-        ans += count[target]
-        
+    ans += count.get(k - elem, 0)
     count[elem] += 1
 
 print(ans)
