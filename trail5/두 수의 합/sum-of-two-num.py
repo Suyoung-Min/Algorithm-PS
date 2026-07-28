@@ -1,33 +1,18 @@
+from collections import defaultdict
+
 n, k = map(int, input().split())
 arr = list(map(int, input().split()))
 
-nd = {}
-
-for num in arr:
-    if num not in nd:
-        nd[num] = 1
-    else:
-        nd[num] += 1
-
-arr = list(set(arr))
-
+count = defaultdict(int)
 ans = 0
 
-visited = set()
+for elem in arr:
 
-for num in arr:
-    target = k - num
+    target = k - elem
 
-    if num in visited or target in visited: continue
-
-    visited.update([target, num])
-
-    if target not in nd: continue
-    
-    if target == num:
-        ans += nd[target] * (nd[target] - 1) // 2
-
-    else:
-        ans += nd[num] * nd[target]
+    if target in count:
+        ans += count[target]
+        
+    count[elem] += 1
 
 print(ans)
