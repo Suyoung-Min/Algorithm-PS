@@ -11,12 +11,12 @@ count = defaultdict(int)
 
 ans = 0
 
-for i in range(n):
-    for j in range(n):
-        count[A[i] + B[j]] += 1
+for a in A:
+    for b in B:
+        count[a+b] += 1
 
-for i in range(n):
-    for j in range(n):
-        ans += count[-(C[i] + D[j])]
+for c in C:
+    for d in D:
+        ans += count.get(-(c+d), 0)
 
 print(ans)
