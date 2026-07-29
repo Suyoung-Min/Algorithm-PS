@@ -7,12 +7,9 @@ from collections import defaultdict
 count = defaultdict(int)
 ans = 0
 
-for x in arr:
-    count[x] += 1
-
-for i in range(n):
-    count[arr[i]] -= 1
+for i in range(n-1, 0, -1):
     for j in range(i):
         ans += count.get(k-arr[i]-arr[j], 0)
+    count[arr[i]]+=1
 
 print(ans)
