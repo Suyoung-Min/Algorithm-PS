@@ -5,35 +5,50 @@ def main():
     
     a, b = map(int, input().split())
     
-    edges = [[] for _ in range(n+1)] # 1~n 정점에 붙은 엣지들
+    edges = [] # (satis, s, e)
     
-    visited = [0] * (n+1)
-
     edges_input = [tuple(map(int, input().split())) for _ in range(m)]
     
     for s, e, satis in edges_input:
-        edges[s].append((e, satis))
-        edges[e].append((s, satis))
+        edges.append((satis, s, e))
         
-    q = deque([(a, float('inf'))]) # 시작점 및 초기 만족도
+    edges.sort(reverse=True)
     
-    max_min_satis = 0
-    visited[a] = float('inf')
+    parent = [i for i in range(n+1)] # 1~n 부모 설정 - 초기 부모는 자기 자신
     
-    while q:
-        cur_v, cur_s = q.popleft() # cur_s 현재 위치에서 지나온 전선 값 중 작은 값
+    def find(x):
+        if x == parent[x]: return x
+        parent[x] = find(parent[x])
+        return parent[x]
+    
+    def same(a, b):
+        return find(a) == find(b)
+    
+    def union(a, b):
+        root_a = find(a)
+        root_b = find(b)
         
-        if cur_v == b: # 도착했으면
-            max_min_satis = max(max_min_satis, cur_s)
-            continue
+        parent[ max(root_a, root_b) ] = min(root_a, root_b)
         
-        for next_v, next_s in edges[cur_v]:
-            new_s = min(cur_s, next_s)
-            if not visited[next_v] or new_s > visited[next_v]:
-                visited[next_v] = new_s
-                q.append((next_v, new_s))
+    deq = deque(edges)
+    
+    ans = 0
+    '''
+    1. 높은 satis 순으로 엣지를 선택    
+    2. s, e 유니온
+    3. 연결 후 a 와 b 가 연결됨 -> 해당 엣지가 a 와 b 를 연결하는 최솟값 중 최대
+    '''
 
-    print(max_min_satis)
-
+    while deq:
+        satis, s, e = deq.popleft()
+        
+        union(s, e)
+        
+        if same(a, b):
+           ans = satis
+           break
+       
+    print(ans) 
+    
 if __name__ == '__main__':
     main()
