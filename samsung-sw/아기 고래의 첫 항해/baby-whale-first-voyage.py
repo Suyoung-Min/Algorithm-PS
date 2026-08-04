@@ -1,3 +1,6 @@
+'''
+풀이시간: 2시간
+'''
 from collections import deque
 
 n, r, c, direct = map(int, input().split())
@@ -18,12 +21,6 @@ grid = [list(map(int, input().split())) for _ in range(n)]
 visited = [[0] * n for _ in range(n)] # 실제 방문 배열
 pos_visit = [[0] * n for _ in range(n)] # 방문 가능한 바다 배열
 visit_2 = [[0] * n for _ in range(n)] # Phase 2 의 visit
-
-def pgrid(grid):
-    print('#'*20)
-    for row in grid:
-        print(' '.join(map(str, row)))
-    print('#'*20)
 
 # 방문 가능 바다 판별
 
@@ -56,7 +53,6 @@ while True:
         break
     
     # 상하좌우 방문 가능 바다
-    
     around_sea = False
     
     for dy, dx in d:
@@ -67,7 +63,6 @@ while True:
             around_sea = True
             break
         
-    
     if around_sea: # Phase 1 
         for i in range(4): # 0, 1, 2, 3
             nd = (direct + d1[i])%4 # 그대로, 좌회전, 우회전, 180도회전
@@ -99,6 +94,8 @@ while True:
         
         while deq:
             ty, tx, cur_direct, cur_dist = deq.popleft()
+            
+            if min_dist < cur_dist: continue
             
             if not visited[ty][tx]: # 아직 실제로 방문안한 바다면
                 if cur_dist <= min_dist:
