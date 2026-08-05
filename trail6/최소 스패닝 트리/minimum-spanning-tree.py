@@ -45,3 +45,4 @@ while edges:
     
     if edge_num == n-1:
         print(edge_weight)
+        break
