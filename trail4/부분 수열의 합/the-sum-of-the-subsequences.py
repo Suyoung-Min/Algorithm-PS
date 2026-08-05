@@ -1,12 +1,8 @@
 n, m = map(int, input().split())
-
 A = list(map(int, input().split()))
 
-dp = [0] * (m+1)
-dp[0] = 1
-
+bits = 1                      # 0번 비트 = 합 0 도달 가능
 for a in A:
-    for s in range(m, a-1, -1):
-        dp[s] = max(dp[s], dp[s-a])
-        
-print('Yes' if dp[m] else 'No')
+    bits |= bits << a
+
+print('Yes' if (bits >> m) & 1 else 'No')
