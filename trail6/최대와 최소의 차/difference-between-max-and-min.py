@@ -28,10 +28,6 @@ for _ in range(m):
         edges_1.append((s, e))
         
 # 최소 비용
-
-min_edges_0 = edges_0[:] # 위험
-min_edges_1 = edges_1[:] # 안전 -> 이것부터
-
 safe_edges_num = 0
 for s, e in edges_1:
     
